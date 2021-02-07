@@ -1,4 +1,4 @@
-package com.tada.summerboot;
+package com.tada.summerboot.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -11,6 +11,5 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/error").setViewName("error");
 		registry.addViewController("/product").setViewName("product");
-
 	}
 }

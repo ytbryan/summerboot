@@ -1,4 +1,4 @@
-package com.tada.summerboot;
+package com.tada.summerboot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) {
 		web.ignoring()
 				.antMatchers("/products/**")
-		        .antMatchers("/users/**");
+				.antMatchers("/products/json/**") //is this necessary?
+				.antMatchers("/users/**");
 		//do not authenticate every APIs from restController
 	}
 	@Override
