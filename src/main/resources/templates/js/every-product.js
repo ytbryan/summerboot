@@ -1,7 +1,7 @@
 function fetchData(){
     console.log("1. fetchData")
     // this will eventually be an endpoint from Spring Boot
-    fetch('http://127.0.0.1:8080/products/all')
+    fetch('http://localhost:8080/products/all')
         .then((resp) => resp.json())
         .then(function(data) {
             console.log("2. receive data")

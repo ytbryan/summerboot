@@ -16,14 +16,17 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) {
+		//DO NOT EDIT
+		//do not authenticate these APIs
 		web.ignoring()
 				.antMatchers("/products/**")
+				.antMatchers("/posts/**")
 				.antMatchers("/products/json/**") //is this necessary?
 				.antMatchers("/users/**");
-		//do not authenticate every APIs from restController
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//DO NOT EDIT
 		http
 			.authorizeRequests()
 				.antMatchers("/").permitAll()
