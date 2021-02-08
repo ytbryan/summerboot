@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<body>
+
+<h1>New product</h1>
+
+<form th:action="@{/products/new}" method="POST">
+    <div><label> Price: <input type="text" name="price"/> </label></div>
+    <div><label> Quantity: <input type="text" name="quantity"/> </label></div>
+    <div><label> SKU: <input type="text" name="sku"/> </label></div>
+    <div><label> Title: <input type="text" name="title"/> </label></div>
+    <div><label> Description: <input type="text" name="description"/> </label></div>
+
+    <div><input type="submit" value="New Product"/></div>
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
