@@ -22,13 +22,13 @@ public class ProductController {
         return product_service_implementation.getAllProduct();
     }
 
-    // TODO - change to POST
     // this is for form-data
     @PostMapping(path="/new")
     public String newProduct(BigDecimal price, Integer quantity, String sku, String title, String description) {
         Product new_product = new Product(price, quantity, sku,title, description);
         product_service_implementation.createProduct(new_product);
-        return "redirect:/hello";
+        // This will redirect to the every product page.
+        return "redirect:/every";
     }
 
     //this is for javascript
