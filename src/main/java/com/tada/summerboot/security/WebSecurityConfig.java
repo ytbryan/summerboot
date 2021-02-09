@@ -1,5 +1,7 @@
 package com.tada.summerboot.security;
 
+import com.tada.summerboot.component.SuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +16,10 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private SuccessHandler successHandler;
+
 	@Override
 	public void configure(WebSecurity web) {
 		//DO NOT EDIT
@@ -36,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/login")
 				.permitAll()
+				.successHandler(successHandler)
 				.and()
 			.logout()
 				.permitAll();
