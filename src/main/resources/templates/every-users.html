@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Users</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<div th:switch="${users}">
+    <p>
+        <a href="/register">
+            <i> Add User </i></a>
+    </p>
+    <div>
+        <h2 th:case="null">No record found !!</h2>
+
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Usertype</th>
+
+                    <th>Show</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.userType}"></td>
+
+                    <td>
+                        <a th:href="@{user/show/{id}(id=${user.id})}">
+                            Show
+                        </a>
+                    </td>
+
+                    <td>
+                        <a th:href="@{user/edit/{id}(id=${user.id})}">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{user/delete/{id}(id=${user.id})}" class="btn btn-primary">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<a href="/">Back to index</a>
+
+</body>
+
+</html>

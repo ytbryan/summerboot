@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Posts</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<div th:switch="${posts}">
+    <p>
+        <a href="/post">
+            <i> Add post </i></a>
+    </p>
+    <div>
+        <h2 th:case="null">No record found !!</h2>
+
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>ImageURL</th>
+
+                    <th>Show</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.title}"></td>
+                    <td th:text="${post.content}"></td>
+                    <td th:text="${post.imageURL}"></td>
+
+                    <td>
+                        <a th:href="@{post/show/{id}(id=${post.id})}">
+                            Show
+                        </a>
+                    </td>
+
+                    <td>
+                        <a th:href="@{post/edit/{id}(id=${post.id})}">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{post/delete/{id}(id=${post.id})}">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<a href="/">Back to index</a>
+</body>
+
+</html>

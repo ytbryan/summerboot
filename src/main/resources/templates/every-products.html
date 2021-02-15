@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Products</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div th:switch="${products}">
+        <p>
+            <a href="/product">
+            <i> Add Product </i></a>
+        </p>
+        <div>
+            <h2 th:case="null">No record found !!</h2>
+
+            <div th:case="*">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>SKU</th>
+                            <th>User_id</th>
+                            <th>ImageURL</th>
+
+                            <th>Show</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product : ${products}">
+                            <td th:text="${product.title}"></td>
+                            <td th:text="${product.description}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.quantity}"></td>
+                            <td th:text="${product.sku}"></td>
+                            <td th:text="${product.user_id}"></td>
+                            <td><img th:src="${product.imageURL}" alt="" width="40" height="40"></td>
+
+                            <td>
+                                <a th:href="@{product/show/{id}(id=${product.id})}">
+                                    Show
+                                </a>
+                            </td>
+
+                            <td>
+                                <a th:href="@{product/edit/{id}(id=${product.id})}">
+                                    Edit
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{product/delete/{id}(id=${product.id})}">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="/">Back to index</a>
+
+</body>
+
+</html>
