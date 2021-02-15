@@ -43,13 +43,13 @@ public class ProductController {
     }
 
     @PostMapping(path="product/image/new")
-    public String newProductWithImage(@RequestParam(name="price") BigDecimal price,
-                             @RequestParam(name="quantity") Integer quantity,
-                             @RequestParam(name="sku") String sku,
-                             @RequestParam(name="title") String title,
-                             @RequestParam(name="description") String description,
-                             @RequestParam(name="user_id") Integer user_id,
-                             @RequestParam(name="image") MultipartFile multipartFile) throws IOException {
+    public String newProductWithImage(@RequestParam(name="price", required = false) BigDecimal price,
+                             @RequestParam(name="quantity", required = false) Integer quantity,
+                             @RequestParam(name="sku", required = false) String sku,
+                             @RequestParam(name="title", required = false) String title,
+                             @RequestParam(name="description", required = false) String description,
+                             @RequestParam(name="user_id", required = false) Integer user_id,
+                             @RequestParam(name="image", required = false) MultipartFile multipartFile) throws IOException {
 
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 //        System.out.println(fileName);
@@ -63,6 +63,7 @@ public class ProductController {
         new_product.setImageURL("user-photos/uploads/"+ new_product.getId() + "/" + fileName);
         product_service_implementation.createOrUpdateProduct(new_product);
 
+//        String uploadDir = "user-photos/uploads/" + new_product.getId();
         String uploadDir = "src/main/resources/static/user-photos/uploads/" + new_product.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return "redirect:/every-products";
@@ -102,12 +103,12 @@ public class ProductController {
 
     // this is for form-data
     @PostMapping(path="product/new")
-    public String newProduct(@RequestParam(name="price") BigDecimal price,
-                             @RequestParam(name="quantity") Integer quantity,
-                             @RequestParam(name="sku") String sku,
-                             @RequestParam(name="title") String title,
-                             @RequestParam(name="description") String description,
-                             @RequestParam(name="user_id") Integer user_id) {
+    public String newProduct(@RequestParam(name="price", required = false) BigDecimal price,
+                             @RequestParam(name="quantity", required = false) Integer quantity,
+                             @RequestParam(name="sku", required = false) String sku,
+                             @RequestParam(name="title", required = false) String title,
+                             @RequestParam(name="description", required = false) String description,
+                             @RequestParam(name="user_id", required = false) Integer user_id) {
 
         //        System.out.println("------*------");
         //        System.out.println("user_id" + user_id);

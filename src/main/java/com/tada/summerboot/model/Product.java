@@ -9,11 +9,23 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE) // GenerationType.TABLE will allow auto-increment of id
     private Integer id;
+
+    @Column(nullable = true)
     private BigDecimal price;
+
+    @Column(nullable = true)
     private Integer quantity;
+
+    @Column(nullable = true)
     private String sku;
+
+    @Column(nullable = true)
     private String title;
+
+    @Column(nullable = true)
     private String description;
+
+    @Column(nullable = true)
     private String productType;
 
     @Column(nullable = true, length = 64)

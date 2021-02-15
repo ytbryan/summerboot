@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Create Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h3> Add/Edit Post</h3>
+    <form action="#" th:action="@{/post/image/new}" th:object="${post}" method="post"  enctype="multipart/form-data">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" th:field="*{title}"
+                        id="title" placeholder="Title" />
+        </div>
+        <div>
+            <label for="content">Content</label>
+            <input type="text" th:field="*{content}"
+                        id="content" placeholder="Content" />
+        </div>
+
+        <div>
+            <label for="image">Image</label>
+            <input id="image" type="file" name="image"
+                   accept="image/png, image/jpeg" />
+        </div>
+
+        <input type="hidden" id="user_id" name="user_id" th:value="${user.id}">
+        <input type="hidden" id="id" name="id" th:value="${post.id}">
+
+        <div>
+            <input type="submit" value=" Submit ">
+        </div>
+    </form>
+
+    <div>
+        <a href="/every-products">Go back to every product</a> <br>
+    </div>
+</body>
+
+</html>

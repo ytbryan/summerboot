@@ -8,8 +8,14 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE) // GenerationType.TABLE will allow auto-increment of id
     private Integer id;
+
+    @Column(nullable = true) // allow null value in this column
     private String title;
+
+    @Column(nullable = true) // allow null value in this column
     private String content;
+
+    @Column(nullable = true) // allow null value in this column
     private String imageURL;
 
     // Required for the @OneToMany relationship with a User
@@ -65,4 +71,9 @@ public class Post {
         super();
     }
 
+    public Post(String title, String content, Integer user_id) {
+        this.title = title;
+        this.content = content;
+        this.user_id = user_id;
+    }
 }
