@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register User</title>
+</head>
+<body>
+<h1>New User</h1>
+<form th:action="@{/user/new}" th:object="${user}" method="POST">
+    <div><label> Name: <input type="text" th:field="*{username}" name="username"/> </label></div>
+    <div><label> Email: <input type="text" th:field="*{email}" name="email"/> </label></div>
+    <div><label> Password: <input type="password" th:field="*{password}" name="password"/> </label></div>
+    <div><label> Retype Password: <input type="password" name="retype_password"/> </label></div>
+    <input type="hidden" th:value="user" th:attr="name='userType'"/>
+
+    <div><input type="submit" value="New User"/></div>
+</form>
+
+<div>
+    <a href="/every-users">Go back to every users</a> <br>
+</div>
+</body>
+</body>
+</html>

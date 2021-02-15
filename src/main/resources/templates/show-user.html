@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show post</title>
+</head>
+<body>
+<h1>Show post</h1>
+
+<form action="#" th:object="${user}" method="post">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" th:field="*{username}"
+               id="username" placeholder="Title" />
+    </div>
+    <div>
+        <label for="email">Content</label>
+        <input type="text" th:field="*{email}"
+               id="email" placeholder="Content" />
+    </div>
+    <div>
+        <label for="password">password</label>
+        <input type="text" th:field="*{password}"
+               id="password" placeholder="password" />
+    </div>
+
+    <input type="hidden" id="id" th:field="*{id}">
+</form>
+
+<div>
+    <a href="/every-users">Back to every users</a>
+</div>
+</body>
+</html>
+</body>
+</html>

@@ -10,8 +10,7 @@
 
 <body>
     <h3> Add/Edit Product</h3>
-    <form action="#" th:action="@{/product/new}" th:object="${product}"
-          method="post">
+    <form action="#" th:action="@{/product/image/new}" th:object="${product}" method="post"  enctype="multipart/form-data">
         <div>
             <label for="title">Title</label>
             <input type="text" th:field="*{title}"
@@ -38,6 +37,13 @@
             <label for="quantity">Quantity</label>
             <input type="text" th:field="*{quantity}"
                    id="quantity" placeholder="Quantity" />
+        </div>
+
+
+        <div>
+            <label for="image">Photos</label>
+            <input id="image" type="file" name="image"
+                   accept="image/png, image/jpeg" />
         </div>
 
         <input type="hidden" id="user_id" name="user_id" th:value="${user.id}">
