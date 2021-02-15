@@ -7,9 +7,17 @@ import java.util.Optional;
 
 public interface ProductServiceInterface {
     // implement abstract methods of CRUD
-    public void createProduct(Product newProduct);
-    public Optional<Product> getProduct(String sku);
-    public void updateProduct(Product updatedProduct);
-    public void deleteProduct(String sku);
-    public List<Product> getAllProduct();
+    void createProduct(Product newProduct);
+    Optional<Product> getProduct(Integer id);
+    void updateProduct(Product updatedProduct);
+    void deleteProduct(Integer id);
+
+    // an abstract method to get all products for all product page
+    List<Product> getAllProduct();
+
+    // create or update product. Two in one method
+    Product createOrUpdateProduct(Product entity);
+
+    //Get a list of product of a User
+    List<Product> findAllByUserId(Integer id);
 }
