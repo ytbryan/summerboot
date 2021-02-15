@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//DO NOT EDIT
 		//do not authenticate these APIs
 		web.ignoring()
+				.antMatchers("/css/**")
 				.antMatchers("/js/**")
 				.antMatchers("/user-photos/**")
 				.antMatchers("/products/**")
