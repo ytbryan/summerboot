@@ -7,12 +7,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
-		//Map the URL to a specific View (html) inside templates
+		//Map the browser's URL to a specific View (HTML) inside resources/templates directory
 		registry.addViewController("/hello").setViewName("hello");
-		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/error").setViewName("error");
-		registry.addViewController("/product").setViewName("product");
-		registry.addViewController("/every").setViewName("every-product");
+
+		//Just to demo fragments
+		registry.addViewController("/fragment1").setViewName("fragment1");
+		registry.addViewController("/fragment2").setViewName("fragment2");
+
+		registry.addViewController("/cart").setViewName("cart");
+		registry.addViewController("/view-cart").setViewName("view-cart");
 
 	}
 }
