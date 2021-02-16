@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Index</h1>
+    <p>Index.html will be reflected at `http://localhost:8080/` (the root directory)</p>
+    <p>Change the html file at `main/resources/static/index.html`</p>
+
+    <h1>Quick links</h1>
+    <ul>
+        <h3>General</h3>
+        <li><a href="/fragment1">fragments</a></li>
+        <li><a href="/login">login</a></li>
+
+        <h3>✍️ Posts</h3>
+        <li><a href="/post">post</a></li>
+        <li><a href="/every-posts">every posts</a></li>
+
+        <h3>👨‍👩‍👦 Users</h3>
+        <li><a href="/register">user registration</a></li>
+        <li><a href="/every-users">every users</a></li>
+
+        <h3>📦 Products</h3>
+        <li><a href="/product-image">product with image</a></li>
+        <li><a href="/product">product</a></li>
+        <li><a href="/every-products">every products</a></li>
+
+
+        <li><a href="/individual">every products by current user</a></li>
+
+    </ul>
+
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h4>
+
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+
+</body>
+</html>

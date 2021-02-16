@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html
+  lang="en-GB"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <title>KAI | Publish</title>
+    <link
+      rel="shortcut icon"
+      href="../assets/images/kai-favicon.ico"
+      type="image/icon type"
+    />
+    <link href="../assets/css/style.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
+    <link href="../assets/css/fonts.css" rel="stylesheet" />
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
+      type="text/css"
+      media="screen"
+      charset="utf-8"
+    />
+  </head>
+
+  <body>
+    <header role="header">
+      <div class="container">
+        <h1 role="logo">
+          <a href="../index.html" title="KAI"
+            ><img
+              src="../assets/images/kai-logo.png"
+              class="img-fluid"
+              title="KAI logo"
+              alt="KAI logo"
+          /></a>
+        </h1>
+
+        <div class="header-nav-wrapper"></div>
+
+        <div>
+          <button type="submit" class="publish-button" id="btnPublish">
+            Publish
+          </button>
+        </div>
+
+        <nav role="header-nav" class="navy">
+          <ul>
+            <li>
+              <a href="../index.html" title="Home">Home</a>
+            </li>
+            <li>
+              <a href="about.html" title="About">About</a>
+            </li>
+            <li>
+              <a href="profile.html" title="Profile">Profile</a>
+            </li>
+            <li>
+              <a href="../../templates/login.html" title="Login">Login</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main role="main-inner-wrapper" class="container">
+      <section class="section-publish">
+        <!-- Medium editor -->
+        <div class="publish-title" id="title">Title</div>
+        <hr />
+        <input
+          name="imageURL"
+          id="imageURL"
+          type="text"
+          placeholder="image URL"
+        />
+        <div class="editable" id="content"></div>
+        <button type="submit" id="btnSubmit">Publish</button>
+
+        <!-- BASIC FORM REQUEST -->
+        <!-- <form
+          action="https://kai-summerboot.herokuapp.com/post/new"
+          method="POST"
+        >
+          <input name="title" type="text" placeholder="title" />
+          <input name="imageURL" type="text" placeholder="image URL" />
+          <input name="content" type="text" placeholder="content" />
+          <button type="submit">Publish</button>
+        </form> -->
+
+        <!-- THYMELEAF TEST
+          th:action - directs form to POST to /post/new endpoint
+          th:object - declares model object used to collect form data
+          thi:field - correspond to fields in model object
+          <form method="POST" th:action="@{/post/new}" th:object="${post}">
+          -->
+        <!-- action="https://kai-summerboot.herokuapp.com/post/new" -->
+        <!-- <input
+            th:field="*{title}"
+            type="text"
+            name="title"
+            placeholder="title"
+          />
+          <input
+            th:field="*{imageURL}"
+            type="text"
+            name="imageURL"
+            placeholder="Image URL"
+          />
+          <textarea th:field="*{content}" name="content" id="mytextarea">
+Share your story...</textarea
+          >
+          <button type="submit">Publish</button>
+        </form> -->
+
+        <!-- <button onClick="submitPost()">Submit</button> -->
+
+        <!-- <div
+          id="medium-editor-toolbar-2"
+          class="medium-editor-toolbar medium-editor-stalker-toolbar medium-editor-toolbar-active"
+        >
+          <ul
+            id="medium-editor-toolbar-actions2"
+            class="medium-editor-toolbar-actions"
+          >
+            <li>
+              <button
+                class="medium-editor-action medium-editor-action-bold medium-editor-button-first"
+                data-action="bold"
+                title="bold"
+              >
+                <i class="fa fa-bold"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                class="medium-editor-action medium-editor-action-italic"
+                data-action="italic"
+                title="italic"
+              >
+                <i class="fa fa-italic"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                class="medium-editor-action medium-editor-action-anchor"
+                data-action="create-link"
+                title="link"
+              >
+                <i class="fa fa-link"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                class="medium-editor-action medium-editor-action-h1 custom-class-h1"
+                data-action="append-h2"
+                title="heading 1"
+                data-custom-attr="attr-value-h1"
+              >
+                <i class="fa fa-header"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                class="medium-editor-action medium-editor-action-h2 custom-class-h2"
+                data-action="append-h3"
+                title="heading 2"
+                data-custom-attr="attr-value-h2"
+              >
+                <i class="fa fa-header"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                class="medium-editor-action medium-editor-action-quote medium-editor-button-last"
+                data-action="append-blockquote"
+                title="blockquote"
+              >
+                <i class="fa fa-quote-right"></i>
+              </button>
+            </li>
+          </ul>
+        </div> -->
+      </section>
+    </main>
+
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <script src="../assets/js/publish.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
