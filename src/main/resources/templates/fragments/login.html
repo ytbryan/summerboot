@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+    <div th:fragment="login">
+        <div sec:authorize="isAuthenticated()">
+            <h4 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h4>
+
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+
+        <div sec:authorize="isAnonymous()">
+            <p>Not logged in <br>
+                <a href="/login">try logging in</a>
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

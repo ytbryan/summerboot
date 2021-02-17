@@ -20,6 +20,8 @@
         <h3>✍️ Posts</h3>
         <li><a href="/post">post</a></li>
         <li><a href="/every-posts">every posts</a></li>
+        <li><a href="/individual-post">every posts by a single user</a></li>
+        <li><a href="/post-image">post with image</a></li>
 
         <h3>👨‍👩‍👦 Users</h3>
         <li><a href="/register">user registration</a></li>
@@ -29,19 +31,28 @@
         <li><a href="/product-image">product with image</a></li>
         <li><a href="/product">product</a></li>
         <li><a href="/every-products">every products</a></li>
-
-
         <li><a href="/individual">every products by current user</a></li>
 
     </ul>
 
-    <div sec:authorize="isAuthenticated()">
-        <h4 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h4>
+    <div th:insert="fragments/login.html :: login"> </div>
 
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </div>
+
+<!--    <div sec:authorize="isAuthenticated()">-->
+<!--        <h4 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h4>-->
+
+<!--        <form th:action="@{/logout}" method="post">-->
+<!--            <input type="submit" value="Sign Out"/>-->
+<!--        </form>-->
+<!--    </div>-->
+
+
+<!--    <div sec:authorize="isAnonymous()">-->
+<!--        <p>Not logged in <br>-->
+<!--            <a href="/login">try logging in</a>-->
+<!--        </p>-->
+<!--    </div>-->
+
 
 </body>
 </html>
