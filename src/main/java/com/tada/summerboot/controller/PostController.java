@@ -37,6 +37,25 @@ public class PostController {
         return "post-image";
     }
 
+    @GetMapping(value="/every-posts-no-table")
+    public String everypostWithoutTable(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = user_service_implementation.current_user(auth.getName());
+        List<Post> list = post_service_implementation.findAllByUserId(user.getId());
+        model.addAttribute("posts", list);
+        return "every-posts-no-table";
+    }
+
+
+    @GetMapping(value="/individual-post")
+    public String everypostByIndividual(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = user_service_implementation.current_user(auth.getName());
+        List<Post> list = post_service_implementation.findAllByUserId(user.getId());
+        model.addAttribute("posts", list);
+        return "individual-post";
+    }
+
     @GetMapping(value="/every-posts") // it will be set to be /product
     public String everyposts(Model model){
         List<Post> posts = post_service_implementation.getAllPosts();
@@ -53,7 +72,6 @@ public class PostController {
     @PostMapping(path="post/image/new")
     public String newPostWithImage(@RequestParam(name="title", required = false) String title,
                                       @RequestParam(name="content", required = false) String content,
-//                                      @RequestParam(name="content", required = false) String imageURL,
                                       @RequestParam(name="user_id", required = false) Integer user_id,
                                       @RequestParam(name="image") MultipartFile multipartFile) throws IOException {
 

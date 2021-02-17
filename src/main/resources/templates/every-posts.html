@@ -25,6 +25,7 @@
                     <th>Title</th>
                     <th>Content</th>
                     <th>ImageURL</th>
+                    <th>User_id</th>
 
                     <th>Show</th>
                     <th>Edit</th>
@@ -36,6 +37,7 @@
                     <td th:text="${post.title}"></td>
                     <td th:text="${post.content}"></td>
                     <td th:text="${post.imageURL}"></td>
+                    <td th:text="${post.user_id}"></td>
 
                     <td>
                         <a th:href="@{post/show/{id}(id=${post.id})}">

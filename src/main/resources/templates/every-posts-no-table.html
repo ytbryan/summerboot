@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Posts</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div th:switch="${posts}">
+        <p>
+            <a href="/post"><i> Add Post </i></a>
+        </p>
+        <div>
+<!--            When there is no record-->
+            <h2 th:case="null">No record found !!</h2>
+
+<!--            When there is some record-->
+            <div th:case="*">
+
+                <div th:each="post : ${posts}">
+                    <div class="">
+                        <h1 th:text="${post.title}"></h1>
+                        <p th:text="${post.content}"></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <a href="/">Back to index</a>
+
+</body>
+
+</html>
