@@ -1,6 +1,7 @@
 package com.tada.summerboot.controller;
 
 import com.tada.summerboot.component.FileUploadUtil;
+import com.tada.summerboot.model.Product;
 import org.springframework.ui.Model;
 import com.tada.summerboot.model.Post;
 import com.tada.summerboot.model.User;
@@ -27,6 +28,16 @@ public class PostController {
 
     @Autowired
     UserServiceImpl user_service_implementation;
+
+    @GetMapping(path="/post/show-username/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public String showUserName(Model model, @PathVariable("id") Integer id) {
+        Optional <Post> post = post_service_implementation.getPost(id);
+        model.addAttribute("post", post.get());
+        Optional <User> user = user_service_implementation.getUser( post.get().getUser_id());
+        model.addAttribute("user", user.get());
+        //$(user.username)?
+        return "show-post-with-username";
+    }
 
     @GetMapping(value="post-image") // it will be set to be /product
     public String postWithImage(Model model){
@@ -65,6 +76,10 @@ public class PostController {
 
     @GetMapping(value="/post") // it will be set to be /product
     public String post(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = user_service_implementation.current_user(auth.getName());
+
+        model.addAttribute("user", user);
         model.addAttribute("post", new Post());
         return "post";
     }
@@ -98,8 +113,9 @@ public class PostController {
     @PostMapping(path="/post/new")
     public String newPost(@RequestParam(name="title", required = false) String title,
                           @RequestParam(name="content", required = false) String content,
+                          @RequestParam(name="user_id", required = false) Integer user_id,
                           @RequestParam(name="imageURL", required = false) String imageURL) {
-        post_service_implementation.createPost(new Post(title, content, imageURL));
+        post_service_implementation.createPost(new Post(title, content, user_id, imageURL));
         // This will redirect to the every product page.
         return "redirect:/every-posts";
     }

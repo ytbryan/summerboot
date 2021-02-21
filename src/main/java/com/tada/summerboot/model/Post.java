@@ -1,7 +1,12 @@
 package com.tada.summerboot.model;
 
+//import lombok.Getter;
+//import lombok.Setter;
+
 import javax.persistence.*;
 
+//@Getter
+//@Setter
 @Entity
 public class Post {
 
@@ -83,5 +88,12 @@ public class Post {
         this.title = title;
         this.content = content;
         this.user_id = user_id;
+    }
+
+    public Post(String title, String content, Integer user_id, String imageURL) {
+        this.title = title;
+        this.content = content;
+        this.user_id = user_id;
+        this.imageURL = imageURL;
     }
 }

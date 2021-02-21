@@ -27,7 +27,8 @@
                    id="imageURL" placeholder="**" />
         </div>
 
-        <input type="hidden" id="id" th:field="*{id}">
+        <input type="hidden" id="user_id" name="user_id" th:value="${user.id}">
+        <input type="hidden" id="id" name="id" th:value="${id}">
 
         <div>
             <input type="submit" value=" Submit ">
