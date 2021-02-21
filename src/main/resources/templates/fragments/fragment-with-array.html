@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fragment with array</title>
+</head>
+<body>
+
+    <div th:fragment="fragment_array(array)">
+        <div th:each="item : ${#strings.arraySplit(array, ',')}"
+              th:text="${item}">
+
+        </div>
+
+
+        <h1 th:each="item : ${#strings.arraySplit(array, ',')}"
+             th:class="${item}">
+            header
+        </h1>
+
+    </div>
+</body>
+</html>

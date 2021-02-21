@@ -5,6 +5,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+        /*Demonstrate passing array into fragment*/
+        .style1{
+            color: red;
+            font-size: 50px;
+        }
+
+        .style2{
+            color: blue;
+            font-size: 30px;
+        }
+
+        .style3{
+            color: green;
+            font-size: 20px;
+
+        }
+    </style>
 </head>
 <body>
     <h1>Index</h1>
@@ -19,26 +38,42 @@
 
         <h3>✍️ Posts</h3>
         <li><a href="/post">post</a></li>
+        <li><a href="/post-image">post with image</a></li>
         <li><a href="/every-posts">every posts</a></li>
         <li><a href="/individual-post">every posts by a single user</a></li>
-        <li><a href="/post-image">post with image</a></li>
 
         <h3>👨‍👩‍👦 Users</h3>
         <li><a href="/register">user registration</a></li>
         <li><a href="/every-users">every users</a></li>
 
         <h3>📦 Products</h3>
-        <li><a href="/product-image">product with image</a></li>
         <li><a href="/product">product</a></li>
+        <li><a href="/product-image">product with image</a></li>
         <li><a href="/every-products">every products</a></li>
-        <li><a href="/individual">every products by current user</a></li>
+        <li><a href="/individual">every products by a single user</a></li>
 
+        <h3>🙌 Extras</h3>
+        <li><a href="/cart">Cart</a></li>
+        <li><a href="/checkout">Checkout with stripe</a></li>
+        <li><a href="/follow">Follow me</a></li>
+        <li><a href="/">See an example app</a></li>
+
+        <h3>🙌 The Challenge</h3>
+        <li><a href="http://github.com/ytbryan/summerboot">Summerboot source code</a></li>
+        <li>Give the repo a star 🌟 and send me a pull request.</li>
     </ul>
 
+    <hr>
     <div th:insert="fragments/login.html :: login"> </div>
 
+    <hr>
 
-<!--    <div sec:authorize="isAuthenticated()">-->
+    <h1><a href="/fragment-with-array">fragment and passing an array</a></h1>
+
+
+    <div th:insert="fragments/fragment-with-array.html :: fragment_array('style1,style2,style3')"></div>
+
+    <!--    <div sec:authorize="isAuthenticated()">-->
 <!--        <h4 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h4>-->
 
 <!--        <form th:action="@{/logout}" method="post">-->
