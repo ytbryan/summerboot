@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:fragment="headerfiles">
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Login</title>-->
+
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+
+    <div th:fragment="login">
+        <div sec:authorize="isAuthenticated()">
+            <h4 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h4>
+
+
+            <div sec:authorize="hasRole('USER')">
+                <p>This is a user.</p>
+            </div>
+
+            <div sec:authorize="hasRole('ADMIN')">
+                <p>This is an admin.</p>
+            </div>
+
+
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+
+<!--            <button th:href="user/follow/${user.id}">Follow me</button>-->
+        </div>
+
+
+
+        <div sec:authorize="isAnonymous()">
+            <p>Not logged in <br>
+                <a th:href="@{/login}">try logging in</a>
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

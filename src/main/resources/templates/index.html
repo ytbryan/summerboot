@@ -4,7 +4,11 @@
 
 <head>
     <meta charset="UTF-8">
+<<<<<<< Updated upstream
     <title>Title</title>
+=======
+    <title>Summerboot</title>
+>>>>>>> Stashed changes
 </head>
 <body>
     <h1>Index</h1>
@@ -13,18 +17,19 @@
 
     <h1>Quick links</h1>
     <ul>
-        <h3>General</h3>
-        <li><a href="/fragment1">fragments</a></li>
-        <li><a href="/login">login</a></li>
+        <div th:insert="fragments/login.html :: login"> </div>
 
+<<<<<<< Updated upstream
         <h3>✍️ Posts</h3>
         <li><a href="/post">post</a></li>
         <li><a href="/every-posts">every posts</a></li>
+=======
+        <hr>
+>>>>>>> Stashed changes
 
-        <h3>👨‍👩‍👦 Users</h3>
-        <li><a href="/register">user registration</a></li>
-        <li><a href="/every-users">every users</a></li>
+        <div th:insert="fragments/content.html :: content"> </div>
 
+<<<<<<< Updated upstream
         <h3>📦 Products</h3>
         <li><a href="/product-image">product with image</a></li>
         <li><a href="/product">product</a></li>
@@ -43,5 +48,9 @@
         </form>
     </div>
 
+=======
+    </ul>
+
+>>>>>>> Stashed changes
 </body>
 </html>

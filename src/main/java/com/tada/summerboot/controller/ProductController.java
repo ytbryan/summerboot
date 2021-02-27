@@ -35,6 +35,7 @@ public class ProductController {
 
     @GetMapping(value="product-image") // it will be set to be /product
     public String productWithImage(Model model){
+        System.out.println("-------");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = user_service_implementation.current_user(auth.getName());
         model.addAttribute("user", user);
@@ -43,6 +44,7 @@ public class ProductController {
     }
 
     @PostMapping(path="product/image/new")
+<<<<<<< Updated upstream
     public String newProductWithImage(@RequestParam(name="price") BigDecimal price,
                              @RequestParam(name="quantity") Integer quantity,
                              @RequestParam(name="sku") String sku,
@@ -50,21 +52,34 @@ public class ProductController {
                              @RequestParam(name="description") String description,
                              @RequestParam(name="user_id") Integer user_id,
                              @RequestParam(name="image") MultipartFile multipartFile) throws IOException {
+=======
+    public String newProductWithImage(
+                            @RequestParam(name="id", required = false) Integer id,
+                            @RequestParam(name="price", required = false) BigDecimal price,
+                             @RequestParam(name="quantity", required = false) Integer quantity,
+                             @RequestParam(name="sku", required = false) String sku,
+                             @RequestParam(name="title", required = false) String title,
+                             @RequestParam(name="description", required = false) String description,
+                             @RequestParam(name="user_id", required = false) Integer user_id,
+                             @RequestParam(name="image", required = false) MultipartFile multipartFile) throws IOException {
+>>>>>>> Stashed changes
 
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//        System.out.println(fileName);
-        logger.debug("Hello from Logback {}");
-
-//        System.out.println("------*------");
-//        System.out.println("user_id" + user_id);
-
-        Product new_product = new Product(price, quantity, sku, title, description, user_id);
+//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        Product new_product = new Product(id, price, quantity, sku, title, description, user_id, multipartFile.getBytes());
         product_service_implementation.createOrUpdateProduct(new_product);
+<<<<<<< Updated upstream
         new_product.setImageURL("user-photos/uploads/"+ new_product.getId() + "/" + fileName);
         product_service_implementation.createOrUpdateProduct(new_product);
 
         String uploadDir = "src/main/resources/static/user-photos/uploads/" + new_product.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+=======
+//        new_product.setImageURL("/user-photos/uploads/"+ new_product.getId() + "/" + fileName);
+//        product_service_implementation.createOrUpdateProduct(new_product);
+//
+//        String uploadDir = "src/main/resources/static/user-photos/uploads/" + new_product.getId();
+//        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+>>>>>>> Stashed changes
         return "redirect:/every-products";
     }
 
@@ -74,7 +89,7 @@ public class ProductController {
         User user = user_service_implementation.current_user(auth.getName());
         List<Product> list = product_service_implementation.findAllByUserId(user.getId());
         model.addAttribute("products", list);
-        return "individual";
+        return "every-products-by-single-user";
     }
 
     @GetMapping(value="/every-products")
@@ -88,7 +103,6 @@ public class ProductController {
     public String product(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = user_service_implementation.current_user(auth.getName());
-
         model.addAttribute("user", user);
         model.addAttribute("product", new Product());
         return "product";
@@ -102,6 +116,7 @@ public class ProductController {
 
     // this is for form-data
     @PostMapping(path="product/new")
+<<<<<<< Updated upstream
     public String newProduct(@RequestParam(name="price") BigDecimal price,
                              @RequestParam(name="quantity") Integer quantity,
                              @RequestParam(name="sku") String sku,
@@ -111,8 +126,18 @@ public class ProductController {
 
         //        System.out.println("------*------");
         //        System.out.println("user_id" + user_id);
+=======
+    public String newProduct( @RequestParam(name="id", required = false) Integer id,
+                             @RequestParam(name="price", required = false) BigDecimal price,
+                             @RequestParam(name="quantity", required = false) Integer quantity,
+                             @RequestParam(name="sku", required = false) String sku,
+                             @RequestParam(name="title", required = false) String title,
+                             @RequestParam(name="description", required = false) String description,
+                             @RequestParam(name="user_id", required = false) Integer user_id,
+                              @RequestParam(name="image") MultipartFile multipartFile) throws IOException {
+>>>>>>> Stashed changes
 
-        Product new_product = new Product(price, quantity, sku, title, description, user_id);
+        Product new_product = new Product(id, price, quantity, sku, title, description, user_id, multipartFile.getBytes());
         product_service_implementation.createOrUpdateProduct(new_product);
         return "redirect:/every-products";
     }
@@ -134,20 +159,21 @@ public class ProductController {
     public String show(Model model, @PathVariable Integer id) {
         Optional<Product> product = product_service_implementation.getProduct(id);
         model.addAttribute("product", product);
-        return "show";
+        return "show-product";
     }
 
     @RequestMapping(path = {"product/edit", "product/edit/{id}"})
     public String editProduct(Model model, @PathVariable("id") Integer id)
     {
         if (id != null) { // when id is null, because it is not in the database
+            System.out.println("the id has a value");
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             User user = user_service_implementation.current_user(auth.getName());
             model.addAttribute("user", user);
-
             Optional<Product> entity = product_service_implementation.getProduct(id);
             model.addAttribute("product", entity.get());
         } else { //else id is present, then we will just create a new entry in the database
+            System.out.println("the id is null");
             model.addAttribute("product", new Product());
         }
         return "product";
