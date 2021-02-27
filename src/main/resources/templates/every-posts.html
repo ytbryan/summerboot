@@ -24,13 +24,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Content</th>
-<<<<<<< Updated upstream
                     <th>ImageURL</th>
-=======
-<!--                    <th>ImageURL</th>-->
-                    <th>User_id</th>
-                    <th>Image again</th>
->>>>>>> Stashed changes
 
                     <th>Show</th>
                     <th>Edit</th>
@@ -41,16 +35,8 @@
                 <tr th:each="post : ${posts}">
                     <td th:text="${post.title}"></td>
                     <td th:text="${post.content}"></td>
-<<<<<<< Updated upstream
                     <td th:text="${post.imageURL}"></td>
 
-=======
-<!--                    <td th:text="${post.imageURL}"></td>-->
-                    <td th:text="${post.user_id}"></td>
-                    <td>
-                        <img th:src="'/post/images/' + ${post.id}" alt="" width="40" height="40"/>
-                    </td>
->>>>>>> Stashed changes
                     <td>
                         <a th:href="@{post/show/{id}(id=${post.id})}">
                             Show

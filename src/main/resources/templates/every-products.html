@@ -43,10 +43,7 @@
                             <td th:text="${product.quantity}"></td>
                             <td th:text="${product.sku}"></td>
                             <td th:text="${product.user_id}"></td>
-<!--                            <td><img th:src="${product.imageURL}" alt="" width="40" height="40"></td>-->
-                            <td>
-                                <img th:src="'/product/images/' + ${product.id}" alt="" width="40" height="40"/>
-                            </td>
+                            <td><img th:src="${product.imageURL}" alt="" width="40" height="40"></td>
 
                             <td>
                                 <a th:href="@{product/show/{id}(id=${product.id})}">

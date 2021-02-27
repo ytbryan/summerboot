@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserServiceInterface{
 
     @Override
     public void createUser(User newUser) {
-
         userRepo.save(newUser);
     }
 

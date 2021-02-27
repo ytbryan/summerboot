@@ -1,18 +1,7 @@
 package com.tada.summerboot.model;
 
-<<<<<<< Updated upstream
 import javax.persistence.*;
 
-=======
-
-import lombok.Setter;
-import lombok.Getter;
-
-import javax.persistence.*;
-
-@Getter
-@Setter
->>>>>>> Stashed changes
 @Entity
 public class Post {
 
@@ -27,7 +16,6 @@ public class Post {
     @Column(name = "user_id")
     private Integer user_id;
 
-<<<<<<< Updated upstream
     public Integer getId() {
         return id;
     }
@@ -51,12 +39,14 @@ public class Post {
     public void setContent(String content) {
         this.content = content;
     }
-=======
-    @Column(nullable = true, columnDefinition="mediumblob")
-    private byte[] image;
->>>>>>> Stashed changes
 
+    public String getImageURL() {
+        return imageURL;
+    }
 
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
     public Post(Integer id, String title, String content, String imageURL) {
         this.id = id;
@@ -75,35 +65,4 @@ public class Post {
         super();
     }
 
-<<<<<<< Updated upstream
-=======
-    public Post(String title, String content, Integer user_id) {
-        this.title = title;
-        this.content = content;
-        this.user_id = user_id;
-    }
-
-    public Post(String title, String content, Integer user_id, byte[] image) {
-        this.title = title;
-        this.content = content;
-        this.user_id = user_id;
-        this.image = image;
-    }
-
-    public Post(String title, String content, Integer user_id, String imageURL) {
-        this.title = title;
-        this.content = content;
-        this.user_id = user_id;
-        this.imageURL = imageURL;
-    }
-
-    public Post(Integer id, String title, String content, Integer user_id, String imageURL) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.user_id = user_id;
-        this.imageURL = imageURL;
-    }
-
->>>>>>> Stashed changes
 }

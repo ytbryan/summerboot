@@ -18,7 +18,7 @@ class Cart {
         localStorage.removeItem(parseInt(id));
     }
 
-    hint(){
+    function hint(){
         console.log("1. Localstorage is not designed to be a database");
         console.log("2. Retrieval of data results in a non-ordered data");
         console.log("3. Storing of data requires stringifying and exact datatype. Meaning \"something\" and something are not the same.");

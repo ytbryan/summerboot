@@ -10,7 +10,7 @@
 
 <body>
     <h3> Add/Edit Product</h3>
-    <form action="#" th:action="@{/product/image/new}" th:object="${product}" method="post" enctype="multipart/form-data">
+    <form action="#" th:action="@{/product/image/new}" th:object="${product}" method="post"  enctype="multipart/form-data">
         <div>
             <label for="title">Title</label>
             <input type="text" th:field="*{title}"

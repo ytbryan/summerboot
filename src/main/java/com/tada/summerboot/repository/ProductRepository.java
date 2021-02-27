@@ -1,9 +1,11 @@
 package com.tada.summerboot.repository;
 
-import java.util.List;
 import com.tada.summerboot.model.Product;
-import org.springframework.data.jpa.repository.Query;
+import com.tada.summerboot.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     //This interface is used to save/update/read/delete data at`product` table
