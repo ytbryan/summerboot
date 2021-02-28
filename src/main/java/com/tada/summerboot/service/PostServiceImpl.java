@@ -47,7 +47,9 @@ public class PostServiceImpl implements PostServiceInterface{
                 Post newEntity = product.get();
                 newEntity.setTitle(entity.getTitle());
                 newEntity.setContent(entity.getContent());
-
+                if(entity.getImage() != null){
+                    newEntity.setImage(entity.getImage());
+                }
                 newEntity = postRepo.save(newEntity);
 
                 return newEntity;
