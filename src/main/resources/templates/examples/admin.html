@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Summerboot</title>
+</head>
+<body>
+    <h1>Admin Index</h1>
+    <p>Index.html will be reflected at `http://localhost:8080/` (the root directory)</p>
+    <p>Change the html file at `main/resources/static/index.html`</p>
+
+    <h1>Quick links</h1>
+    <ul>
+        <div th:insert="fragments/login.html :: login"> </div>
+
+        <hr>
+
+        <div th:insert="fragments/content.html :: content"> </div>
+
+    </ul>
+
+</body>
+</html>

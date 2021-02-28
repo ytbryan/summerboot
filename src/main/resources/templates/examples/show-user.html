@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show post</title>
+    <title>Show user</title>
 </head>
 <body>
-<h1>Show post</h1>
+<h1>Show user</h1>
 
 <form action="#" th:object="${user}" method="post">
     <div>
@@ -14,14 +14,20 @@
                id="username" placeholder="Title" />
     </div>
     <div>
-        <label for="email">Content</label>
+        <label for="email">Email</label>
         <input type="text" th:field="*{email}"
                id="email" placeholder="Content" />
     </div>
     <div>
-        <label for="password">password</label>
+        <label for="password">Password</label>
         <input type="text" th:field="*{password}"
                id="password" placeholder="password" />
+    </div>
+
+    <div>
+        <label for="usertype">Usertype</label>
+        <input type="text" th:field="*{userType}"
+               id="usertype" placeholder="usertype" />
     </div>
 
     <input type="hidden" id="id" th:field="*{id}">

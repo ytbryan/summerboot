@@ -10,6 +10,7 @@
 <body>
 
     <div th:fragment="fragment_array(array)">
+
         <div th:each="item : ${#strings.arraySplit(array, ',')}"
               th:text="${item}">
 
@@ -20,6 +21,8 @@
              th:class="${item}">
             header
         </h1>
+
+        <a href="/">Go back to index</a>
 
     </div>
 </body>

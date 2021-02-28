@@ -49,7 +49,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a th:href="@{post/delete/{id}(id=${post.id})}">
+                                <a th:href="@{post/delete/{id}(id=${post.id})}" onclick="return confirm('Are you sure you want to delete this?');">
                                     Delete
                                 </a>
                             </td>

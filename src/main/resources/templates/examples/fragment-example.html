@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Passing array into fragment</title>
+
+    <style>
+        /*Demonstrate passing array into fragment*/
+        .style1{
+            color: red;
+            font-size: 50px;
+        }
+
+        .style2{
+            color: blue;
+            font-size: 30px;
+        }
+
+        .style3{
+            color: green;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+<body>
+
+<h1>Please see the fragment at fragments/fragment-with-array.html</h1>
+
+<div th:insert="fragments/fragment-with-array.html :: fragment_array('style1,style2,style3')"></div>
+
+</body>
+</html>

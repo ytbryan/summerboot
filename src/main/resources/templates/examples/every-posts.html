@@ -24,8 +24,8 @@
                 <tr>
                     <th>Title</th>
                     <th>Content</th>
-                    <th>ImageURL</th>
                     <th>User_id</th>
+                    <th>Image again</th>
 
                     <th>Show</th>
                     <th>Edit</th>
@@ -36,9 +36,11 @@
                 <tr th:each="post : ${posts}">
                     <td th:text="${post.title}"></td>
                     <td th:text="${post.content}"></td>
-                    <td th:text="${post.imageURL}"></td>
-                    <td th:text="${post.user_id}"></td>
 
+                    <td th:text="${post.user_id}"></td>
+                    <td>
+                        <img th:src="'/post/images/' + ${post.id}" alt="" width="40" height="40"/>
+                    </td>
                     <td>
                         <a th:href="@{post/show/{id}(id=${post.id})}">
                             Show
@@ -51,7 +53,7 @@
                         </a>
                     </td>
                     <td>
-                        <a th:href="@{post/delete/{id}(id=${post.id})}">
+                        <a th:href="@{post/delete/{id}(id=${post.id})}" onclick="return confirm('Are you sure you want to delete this?');">
                             Delete
                         </a>
                     </td>

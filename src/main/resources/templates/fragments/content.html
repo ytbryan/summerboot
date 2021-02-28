@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="content">
+    <h3>General</h3>
+    <li><a href="/fragment-example">fragments with array</a></li>
+    <li><a href="/fragment1">fragment 1</a></li>
+    <li><a href="/fragment2">fragment 2 (Admin only)</a></li>
+    <li><a href="/show-whatsapp-button">Contact us button</a></li>
+
+    <h3>✍️ Posts</h3>
+    <li><a href="/post">post</a></li>
+    <li><a href="/post-image">post with image</a></li>
+    <li><a href="/every-posts">every posts</a></li>
+    <li><a href="/every-posts-by-single-user">every posts by a single user</a></li>
+    <li><a href="/every-posts-no-table">every posts with no table</a></li>
+
+    <h3>👨‍👩‍👦 Users</h3>
+    <li><a href="/register-admin">admin registration (Admin only)</a></li>
+    <li><a href="/register">user registration</a></li>
+    <li><a href="/every-users">every users</a></li>
+
+    <h3>📦 Products</h3>
+    <li><a href="/product">product</a></li>
+    <li><a href="/product-image">product with image</a></li>
+    <li><a href="/every-products">every products</a></li>
+    <li><a href="/individual">every products by a single user</a></li>
+
+    <h3>🙌 Extras</h3>
+    <li><a href="https://github.com/ytbryan/summerboot/blob/main/src/test/java/com/tada/summerboot/SummerbootApplicationTests.java">Tests - check out SummerbootApplicationTests</a></li>
+    <li><a href="/checkout">Checkout with stripe</a></li>
+    <strike><li><a href="/cart">Cart</a></li></strike>
+    <strike><li><a href="/">See an example app</a></li></strike>
+
+    <h3>🙌 The Challenge</h3>
+    <li><a href="http://github.com/ytbryan/summerboot">Summerboot source code</a></li>
+    <li>Contribute to Summerboot. Give the repo a star 🌟 and send me a pull request.
+        You can add to Summerboot to your github profile.
+    </li>
+
+</div>
+
+
+</body>
+</html>
