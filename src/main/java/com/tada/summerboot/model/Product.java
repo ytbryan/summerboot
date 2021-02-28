@@ -1,8 +1,13 @@
 package com.tada.summerboot.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Getter
+@Setter
 @Entity
 public class Product {
 
@@ -35,65 +40,8 @@ public class Product {
     @Column(name = "user_id")
     private Integer user_id;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public String getSku() {
-        return sku;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
+    @Column(nullable= true, columnDefinition="mediumblob")
+    private byte[] image;
 
     public Product(BigDecimal price, Integer quantity, String sku, String title, String description, Integer user_id) {
         this.price = price;
@@ -112,6 +60,17 @@ public class Product {
         this.title = title;
         this.description = description;
         this.user_id = user_id;
+    }
+
+    public Product(Integer id, BigDecimal price, Integer quantity, String sku, String title, String description, Integer user_id, byte[] image) {
+        this.id = id;
+        this.price = price;
+        this.quantity = quantity;
+        this.sku = sku;
+        this.title = title;
+        this.description = description;
+        this.user_id = user_id;
+        this.image = image;
     }
 
     public Product(Integer id, BigDecimal price, Integer quantity, String sku, String title, String description) {
