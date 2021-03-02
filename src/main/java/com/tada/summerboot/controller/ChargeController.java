@@ -21,18 +21,18 @@ public class ChargeController {
     @PostMapping("/charge")
     public String charge(ChargeRequest chargeRequest, Model model) throws StripeException {
         chargeRequest.setDescription("Example charge");
-        chargeRequest.setCurrency(ChargeRequest.Currency.EUR);
+        chargeRequest.setCurrency(ChargeRequest.Currency.SGD);
         Charge charge = paymentsService.charge(chargeRequest);
         model.addAttribute("id", charge.getId());
         model.addAttribute("status", charge.getStatus());
         model.addAttribute("chargeId", charge.getId());
         model.addAttribute("balance_transaction", charge.getBalanceTransaction());
-        return "result";
+        return "examples/result";
     }
 
     @ExceptionHandler(StripeException.class)
     public String handleError(Model model, StripeException ex) {
         model.addAttribute("error", ex.getMessage());
-        return "result";
+        return "examples/result";
     }
 }
