@@ -57,10 +57,8 @@ git push heroku <branch name>:main
 ```
 # Examples
 
-```
-[Repo](https://github.com/jonathanlzy/appeaseofcake.git)
-[Heroku]: https://appofcake.herokuapp.com/
-```
+* appeaseofcake:[Repo](https://github.com/jonathanlzy/appeaseofcake.git)[Heroku](https://appofcake.herokuapp.com/)
+
 # License 
 
 MIT
