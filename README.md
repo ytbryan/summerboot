@@ -55,7 +55,12 @@ git remote add heroku <https://git.heroku.com/temasek-final-project.git>
 ```
 git push heroku <branch name>:main
 ```
+# Examples
 
+```
+https://github.com/jonathanlzy/appeaseofcake.git
+https://appofcake.herokuapp.com/
+```
 # License 
 
 MIT
