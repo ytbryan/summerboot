@@ -58,8 +58,8 @@ git push heroku <branch name>:main
 # Examples
 
 ```
-https://github.com/jonathanlzy/appeaseofcake.git
-https://appofcake.herokuapp.com/
+[Repo](https://github.com/jonathanlzy/appeaseofcake.git)
+[Heroku](https://appofcake.herokuapp.com/
 ```
 # License 
 
