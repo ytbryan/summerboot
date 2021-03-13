@@ -1,5 +1,8 @@
 # Summerboot 
 
+> Learners and students, please give this repo a star ⭐️. You may send in your pull request to improve on this project. When your contribution has been accepted, you can add it to your profile. It serves as a starting point towards Open Source. 
+
+
 ![summerboot](sb.png)
 
 Summerboot is a skeleton Spring boot project to demonstrate the following features: 
