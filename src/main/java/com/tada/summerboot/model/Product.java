@@ -43,24 +43,6 @@ public class Product {
     @Column(nullable= true, columnDefinition="mediumblob")
     private byte[] image;
 
-    public Product(BigDecimal price, Integer quantity, String sku, String title, String description, Integer user_id) {
-        this.price = price;
-        this.quantity = quantity;
-        this.sku = sku;
-        this.title = title;
-        this.description = description;
-        this.user_id = user_id;
-    }
-
-    public Product(Integer id, BigDecimal price, Integer quantity, String sku, String title, String description, Integer user_id) {
-        this.id = id;
-        this.price = price;
-        this.quantity = quantity;
-        this.sku = sku;
-        this.title = title;
-        this.description = description;
-        this.user_id = user_id;
-    }
 
     public Product(Integer id, BigDecimal price, Integer quantity, String sku, String title, String description, Integer user_id, byte[] image) {
         this.id = id;
@@ -71,23 +53,6 @@ public class Product {
         this.description = description;
         this.user_id = user_id;
         this.image = image;
-    }
-
-    public Product(Integer id, BigDecimal price, Integer quantity, String sku, String title, String description) {
-        this.id = id;
-        this.price = price;
-        this.quantity = quantity;
-        this.sku = sku;
-        this.title = title;
-        this.description = description;
-    }
-
-    public Product(BigDecimal price, Integer quantity, String sku, String title, String description) {
-        this.price = price;
-        this.quantity = quantity;
-        this.sku = sku;
-        this.title = title;
-        this.description = description;
     }
 
     public Product(){

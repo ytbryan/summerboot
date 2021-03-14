@@ -1,11 +1,8 @@
 package com.tada.summerboot.model;
 
 import javax.persistence.*;
-
-
 import lombok.Setter;
 import lombok.Getter;
-
 
 @Getter
 @Setter
@@ -26,29 +23,6 @@ public class Post {
     @Column(nullable = true, columnDefinition="mediumblob")
     private byte[] image;
 
-    public Post(Integer id, String title, String content, String imageURL) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.imageURL = imageURL;
-    }
-
-    public Post(String title, String content, String imageURL) {
-        this.title = title;
-        this.content = content;
-        this.imageURL = imageURL;
-    }
-
-    public Post(){
-        super();
-    }
-
-    public Post(String title, String content, Integer user_id) {
-        this.title = title;
-        this.content = content;
-        this.user_id = user_id;
-    }
-
     public Post(String title, String content, Integer user_id, byte[] image) {
         this.title = title;
         this.content = content;
@@ -56,12 +30,6 @@ public class Post {
         this.image = image;
     }
 
-    public Post(String title, String content, Integer user_id, String imageURL) {
-        this.title = title;
-        this.content = content;
-        this.user_id = user_id;
-        this.imageURL = imageURL;
-    }
 
     public Post(Integer id, String title, String content, Integer user_id, String imageURL) {
         this.id = id;
@@ -70,5 +38,7 @@ public class Post {
         this.user_id = user_id;
         this.imageURL = imageURL;
     }
-
+    public Post(){
+        super();
+    }
 }

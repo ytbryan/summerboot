@@ -51,7 +51,7 @@ public class ProductController {
         Product new_product = new Product(id, price, quantity, sku, title, description, user_id, multipartFile.getBytes());
         product_service_implementation.createOrUpdateProduct(new_product);
 
-        return "examples/every-products";
+        return "redirect:/every-products";
     }
 
     @GetMapping(value="/individual")
@@ -85,21 +85,6 @@ public class ProductController {
         return product_service_implementation.getAllProduct();
     }
 
-    // this is for form-data
-    @PostMapping(path="product/new")
-    public String newProduct( @RequestParam(name="id", required = false) Integer id,
-                             @RequestParam(name="price", required = false) BigDecimal price,
-                             @RequestParam(name="quantity", required = false) Integer quantity,
-                             @RequestParam(name="sku", required = false) String sku,
-                             @RequestParam(name="title", required = false) String title,
-                             @RequestParam(name="description", required = false) String description,
-                             @RequestParam(name="user_id", required = false) Integer user_id, @RequestParam(name="image") MultipartFile multipartFile) throws IOException {
-
-        Product new_product = new Product(id, price, quantity, sku, title, description, user_id, multipartFile.getBytes());
-        product_service_implementation.createOrUpdateProduct(new_product);
-        return "examples/every-products";
-    }
-
     // This is for Javascript
     @PostMapping(path="product/json/new", produces = { MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody String newProduct(@RequestBody Product product) {
@@ -110,7 +95,7 @@ public class ProductController {
     @RequestMapping(path="product/delete/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public String destroy(@PathVariable Integer id) {
         product_service_implementation.deleteProduct(id);
-        return "examples/every-products";
+        return "redirect:/every-products";
     }
 
     @GetMapping(path="product/show/{id}")

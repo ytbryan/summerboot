@@ -84,7 +84,7 @@ public class PostController {
 
         Post new_post = new Post(title, content, user_id, multipartFile.getBytes());
         post_service_implementation.createOrUpdatePost(new_post);
-        return "examples/every-posts";
+        return "redirect:/every-posts";
     }
 
     @GetMapping(path="/post/all", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -102,7 +102,7 @@ public class PostController {
                           @RequestParam(name="imageURL", required = false) String imageURL) {
 
         post_service_implementation.createOrUpdatePost(new Post(id, title, content, user_id, imageURL));
-        return "examples/every-posts";
+        return "redirect:/every-posts";
     }
 
     //this is for javascript
@@ -124,7 +124,7 @@ public class PostController {
     @GetMapping(path="/post/delete/{id}")
     public String destroy(@PathVariable("id") Integer id) {
         post_service_implementation.deletePost(id);
-        return "examples/every-posts";
+        return "redirect:/every-posts";
     }
 
     @RequestMapping(path = {"post/edit", "post/edit/{id}"})
