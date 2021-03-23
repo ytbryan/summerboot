@@ -68,7 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//DO NOT EDIT
 		http.authorizeRequests()
 				.antMatchers("/").permitAll()
-
 				.antMatchers("/product").hasRole("ADMIN")
 				.antMatchers("/register").permitAll()
 				.antMatchers("/fragment2").hasRole("ADMIN")

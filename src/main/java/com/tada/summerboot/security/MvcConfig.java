@@ -9,9 +9,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		//Map the browser's URL to a specific View (HTML) inside resources/templates directory
 		registry.addViewController("/hello").setViewName("examples/hello");
-		registry.addViewController("/new-checkout").setViewName("examples/new-checkout");
-		registry.addViewController("/result-failed").setViewName("examples/result-failed");
-		registry.addViewController("/result-success").setViewName("examples/result-success");
+
 		//Just to demo fragments
 		registry.addViewController("/fragment1").setViewName("examples/fragment1");
 		registry.addViewController("/fragment2").setViewName("examples/fragment2");
