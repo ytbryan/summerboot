@@ -15,7 +15,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.TABLE) // GenerationType.TABLE will allow auto-increment of id
     @Column(name = "id")
     private Integer id;
-
     private String username;
     private String password;
     private String email;
