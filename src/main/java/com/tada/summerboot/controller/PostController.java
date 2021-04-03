@@ -1,16 +1,14 @@
 package com.tada.summerboot.controller;
 
-import org.springframework.ui.Model;
 import com.tada.summerboot.model.Post;
 import com.tada.summerboot.model.User;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import com.tada.summerboot.service.PostServiceImpl;
 import com.tada.summerboot.service.UserServiceImpl;
-import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -29,42 +27,40 @@ public class PostController {
     @Autowired
     UserServiceImpl user_service_implementation;
 
-    @GetMapping(path="/posts/show-username/{id}")
+    @GetMapping(path="/post/show-username/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public String showUserName(Model model, @PathVariable("id") Integer id) {
-        System.out.println("reached here");
         Optional <Post> post = post_service_implementation.getPost(id);
         model.addAttribute("post", post.get());
         Optional <User> user = user_service_implementation.getUser( post.get().getUser_id());
         model.addAttribute("user", user.get());
-        return "show-post";
+        //$(user.username)?
+        return "examples/show-post-with-username";
     }
 
-//    @GetMapping(path="/post/show-username/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-//    public String showUserName(Model model, @PathVariable("id") Integer id) {
-//        Optional <Post> post = post_service_implementation.getPost(id);
-//        model.addAttribute("post", post.get());
-//        Optional <User> user = user_service_implementation.getUser( post.get().getUser_id());
-//        model.addAttribute("user", user.get());
-//        //$(user.username)?
-//        return "show-post-with-username";
-//    }
+    @GetMapping(value="post") // it will be set to be /product
+    public String post(Model model){
+        User user = user_service_implementation.current_user();
+        model.addAttribute("user", user);
+        model.addAttribute("post", new Post());
+        return "examples/post";
+    }
 
-    @GetMapping(value="post-image") // it will be set to be /product
+    @GetMapping(value="/post-image") // it will be set to be /product
     public String postWithImage(Model model){
         User user = user_service_implementation.current_user();
         model.addAttribute("user", user);
         model.addAttribute("post", new Post());
-        return "publish";
+        return "examples/post-image";
     }
 
-    @GetMapping(value="/")
+    @GetMapping(value="/every-posts-no-table")
     public String everypostWithoutTable(Model model){
         System.out.println("reached here /");
         List<Post> posts = post_service_implementation.getAllPosts(); // get all the posts
         model.addAttribute("posts", posts);
 
         List<User> users = new ArrayList<>(); // prepare an empty list
-        System.out.println(posts.size());
+//        System.out.println(posts.size());
         for (int i = 0; i < posts.size(); i++) {
             Post post = posts.get(i);
             Optional<User> user = user_service_implementation.getUser(post.getUser_id()); // get the user object
@@ -73,7 +69,7 @@ public class PostController {
 
         model.addAttribute("users", users); // make it available via users variable. Use stats.index to access specific index.
 
-        return "index";
+        return "examples/every-posts-no-table";
     }
 
     @GetMapping(value="/every-posts-by-single-user")
@@ -82,36 +78,18 @@ public class PostController {
         List<Post> list = post_service_implementation.findAllByUserId(user.getId());
         model.addAttribute("posts", list);
         model.addAttribute("user", user);
-        return "profile";
+        return "examples/every-posts-by-single-user";
     }
 
-//    @GetMapping(value="/individual-post")
-//    public String everypostByIndividual(Model model){
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user = user_service_implementation.current_user(auth.getName());
-//        List<Post> list = post_service_implementation.findAllByUserId(user.getId());
-//        model.addAttribute("posts", list);
-//        return "individual-post";
-//    }
 
-    @GetMapping(value="/") // it will be set to be /product
+    @GetMapping(value="/every-posts") // it will be set to be /product
     public String everyposts(Model model){
         List<Post> posts = post_service_implementation.getAllPosts();
         List<User> users = new ArrayList<>();
 
-
         model.addAttribute("posts", posts); // this will pass the value to a ${user}
         return "examples/every-posts";
     }
-
-//    @GetMapping(value="/post") // it will be set to be /product
-//    public String post(Model model){
-//        User user = user_service_implementation.current_user();
-//
-//        model.addAttribute("user", user);
-//        model.addAttribute("post", new Post());
-//        return "examples/post";
-//    }
 
     @PostMapping(path="post/image/new")
     public String newPostWithImage(@RequestParam(name="id", required = false) Integer id,
@@ -132,16 +110,17 @@ public class PostController {
     }
 
     // this is for form-data
-//    @PostMapping(path="/post/new")
-//    public String newPost(@RequestParam(name="id", required=false) Integer id,
-//                          @RequestParam(name="title", required = false) String title,
-//                          @RequestParam(name="content", required = false) String content,
-//                          @RequestParam(name="user_id", required = false) Integer user_id,
-//                          @RequestParam(name="imageURL", required = false) String imageURL) {
-//
-//        post_service_implementation.createOrUpdatePost(new Post(id, title, content, user_id, imageURL));
-//        return "examples/every-posts";
-//    }
+    @PostMapping(path="/post/new")
+    public String newPost(@RequestParam(name="id", required=false) Integer id,
+                          @RequestParam(name="title", required = false) String title,
+                          @RequestParam(name="content", required = false) String content,
+                          @RequestParam(name="user_id", required = false) Integer user_id,
+                          @RequestParam(name="imageURL", required = false) String imageURL) {
+
+        post_service_implementation.createOrUpdatePost(
+                new Post(id, title, content, user_id, imageURL));
+        return "examples/every-posts";
+    }
 
     //this is for javascript
     @PostMapping(path="/post/json/new", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -151,12 +130,12 @@ public class PostController {
         return "{\"status\": \"success\"}";
     }
 
-//    @GetMapping(path="/post/show/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-//    public String show(Model model, @PathVariable("id") Integer id) {
-//        Optional <Post> post = post_service_implementation.getPost(id);
-//        model.addAttribute("post", post);
-//        return "examples/show-post";
-//    }
+    @GetMapping(path="/post/show/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public String show(Model model, @PathVariable("id") Integer id) {
+        Optional <Post> post = post_service_implementation.getPost(id);
+        model.addAttribute("post", post);
+        return "examples/show-post";
+    }
 
     //TODO - change to delete
     @GetMapping(path="/post/delete/{id}")
@@ -164,8 +143,6 @@ public class PostController {
         post_service_implementation.deletePost(id);
         return "redirect:/every-posts-by-single-user";
     }
-
-
 
     @RequestMapping(path = {"post/edit", "post/edit/{id}"})
     public String editPost(Model model, @PathVariable("id") Integer id)
@@ -181,10 +158,6 @@ public class PostController {
             System.out.println("The id is NULL");
             model.addAttribute("post", new Post());
         }
-        return "publish";
+        return "examples/post";
     }
-
-
 }
-
-//line 88 edited
