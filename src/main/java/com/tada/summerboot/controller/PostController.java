@@ -1,19 +1,20 @@
 package com.tada.summerboot.controller;
 
-import org.springframework.ui.Model;
 import com.tada.summerboot.model.Post;
 import com.tada.summerboot.model.User;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import com.tada.summerboot.service.PostServiceImpl;
 import com.tada.summerboot.service.UserServiceImpl;
-import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,15 @@ public class PostController {
         return "examples/show-post-with-username";
     }
 
-    @GetMapping(value="post-image") // it will be set to be /product
+    @GetMapping(value="post") // it will be set to be /product
+    public String post(Model model){
+        User user = user_service_implementation.current_user();
+        model.addAttribute("user", user);
+        model.addAttribute("post", new Post());
+        return "examples/post";
+    }
+
+    @GetMapping(value="/post-image") // it will be set to be /product
     public String postWithImage(Model model){
         User user = user_service_implementation.current_user();
         model.addAttribute("user", user);
@@ -46,9 +55,20 @@ public class PostController {
 
     @GetMapping(value="/every-posts-no-table")
     public String everypostWithoutTable(Model model){
-        User user = user_service_implementation.current_user();
-        List<Post> list = post_service_implementation.findAllByUserId(user.getId());
-        model.addAttribute("posts", list);
+        System.out.println("reached here /");
+        List<Post> posts = post_service_implementation.getAllPosts(); // get all the posts
+        model.addAttribute("posts", posts);
+
+        List<User> users = new ArrayList<>(); // prepare an empty list
+//        System.out.println(posts.size());
+        for (int i = 0; i < posts.size(); i++) {
+            Post post = posts.get(i);
+            Optional<User> user = user_service_implementation.getUser(post.getUser_id()); // get the user object
+            users.add(user.get()); // add it to the userList
+        }
+
+        model.addAttribute("users", users); // make it available via users variable. Use stats.index to access specific index.
+
         return "examples/every-posts-no-table";
     }
 
@@ -57,34 +77,30 @@ public class PostController {
         User user = user_service_implementation.current_user();
         List<Post> list = post_service_implementation.findAllByUserId(user.getId());
         model.addAttribute("posts", list);
+        model.addAttribute("user", user);
         return "examples/every-posts-by-single-user";
     }
+
 
     @GetMapping(value="/every-posts") // it will be set to be /product
     public String everyposts(Model model){
         List<Post> posts = post_service_implementation.getAllPosts();
+        List<User> users = new ArrayList<>();
+
         model.addAttribute("posts", posts); // this will pass the value to a ${user}
         return "examples/every-posts";
     }
 
-    @GetMapping(value="/post") // it will be set to be /product
-    public String post(Model model){
-        User user = user_service_implementation.current_user();
-
-        model.addAttribute("user", user);
-        model.addAttribute("post", new Post());
-        return "examples/post";
-    }
-
     @PostMapping(path="post/image/new")
-    public String newPostWithImage(@RequestParam(name="title", required = false) String title,
+    public String newPostWithImage(@RequestParam(name="id", required = false) Integer id,
+                                     @RequestParam(name="title", required = false) String title,
                                       @RequestParam(name="content", required = false) String content,
                                       @RequestParam(name="user_id", required = false) Integer user_id,
                                       @RequestParam(name="image") MultipartFile multipartFile) throws IOException {
 
-        Post new_post = new Post(title, content, user_id, multipartFile.getBytes());
+        Post new_post = new Post(id, title, content, user_id, multipartFile.getBytes(), new Timestamp(Calendar.getInstance().getTime().getTime()));
         post_service_implementation.createOrUpdatePost(new_post);
-        return "redirect:/every-posts";
+        return "redirect:/every-posts-by-single-user";
     }
 
     @GetMapping(path="/post/all", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -101,8 +117,9 @@ public class PostController {
                           @RequestParam(name="user_id", required = false) Integer user_id,
                           @RequestParam(name="imageURL", required = false) String imageURL) {
 
-        post_service_implementation.createOrUpdatePost(new Post(id, title, content, user_id, imageURL));
-        return "redirect:/every-posts";
+        post_service_implementation.createOrUpdatePost(
+                new Post(id, title, content, user_id, imageURL));
+        return "examples/every-posts";
     }
 
     //this is for javascript
@@ -124,7 +141,7 @@ public class PostController {
     @GetMapping(path="/post/delete/{id}")
     public String destroy(@PathVariable("id") Integer id) {
         post_service_implementation.deletePost(id);
-        return "redirect:/every-posts";
+        return "redirect:/every-posts-by-single-user";
     }
 
     @RequestMapping(path = {"post/edit", "post/edit/{id}"})
